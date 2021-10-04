@@ -1,52 +1,16 @@
-# aws-cdk-webpack-lambda-function
+# aws-cdk-esbuild-lambda-function
 
 forked from [@aws-cdk/aws-lambda-nodejs](https://github.com/aws/aws-cdk/tree/master/packages/%40aws-cdk/aws-lambda-nodejs)
 
-This library provides constructs for Node.js Lambda function bundled using webpack.
+This library provides constructs for Node.js Lambda function bundled using esbuild.
 
 ## Quick Start
 
 1. install using yarn:
 
    ```sh
-   yarn add -D aws-cdk-webpack-lambda-function @aws-cdk/core @aws-cdk/aws-lambda webpack webpack-cli
-   # npm i -D aws-cdk-webpack-lambda-function @aws-cdk/core @aws-cdk/aws-lambda webpack webpack-cli
-   ```
-
-   Note: webpack@5 required.
-
-1. add webpack.config.js:
-
-   ```js
-   module.exports = {
-     mode: "production", // production or development
-     target: "node",
-     externals: [/^aws-sdk(\/.+)?$/], // important!!!
-     devtool: "source-map", // if needed
-     optimization: { minimize: false }, // if needed
-     // for TypeScript
-     module: {
-       rules: [
-         {
-           test: /\.ts$/,
-           use: {
-             loader: "ts-loader",
-             options: {
-               configFile: "your/path/to/tsconfig.json", // if needed
-               // colors: true,
-               // logInfoToStdOut: true,
-               // logLevel: 'INFO',
-               transpileOnly: true,
-             },
-           },
-           exclude: /node_modules/,
-         },
-       ],
-     },
-     resolve: {
-       extensions: [".js", ".ts"],
-     },
-   };
+   yarn add -D aws-cdk-esbuild-lambda-function @aws-cdk/core @aws-cdk/aws-lambda esbuild
+   # npm i -D aws-cdk-esbuild-lambda-function @aws-cdk/core @aws-cdk/aws-lambda esbuild
    ```
 
 1. (Optional) add tsconfig.json for lambda
@@ -65,11 +29,23 @@ This library provides constructs for Node.js Lambda function bundled using webpa
 1. your cdk source code:
 
    ```typescript
-   import { WebpackFunction } from "aws-cdk-webpack-lambda-function";
+   import {
+     EsbuildEdgeFunction,
+     EsbuildFunction,
+     EsbuildSingletonFunction,
+   } from "aws-cdk-esbuild-lambda-function";
 
-   new WebpackFunction(this, "YourFunction", {
+   new EsbuildEdgeFunction(this, "YourFunction", {
      entry: "your/path/to/function.ts",
-     config: "your/path/to/webpack.config.js",
+   });
+
+   new EsbuildFunction(this, "YourFunction", {
+     entry: "your/path/to/function.ts",
+   });
+
+   new EsbuildSingletonFunction(this, "YourFunction", {
+     entry: "your/path/to/function.ts",
+     uuid: "39d0657d-165d-4853-83a7-80723c9b8721",
    });
    ```
 
@@ -78,10 +54,6 @@ This library provides constructs for Node.js Lambda function bundled using webpa
 ### entry: string (required)
 
 Path to the entry file (JavaScript or TypeScript).
-
-### config: string (required)
-
-Path to webpack config file.
 
 ### handler: string
 

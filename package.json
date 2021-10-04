@@ -1,7 +1,7 @@
 {
-  "name": "aws-cdk-webpack-lambda-function",
-  "version": "0.6.0",
-  "description": "This library provides constructs for Node.js Lambda function bundled using webpack.",
+  "name": "aws-cdk-esbuild-lambda-function",
+  "version": "1.0.0",
+  "description": "This library provides constructs for Node.js Lambda function bundled using esbuild.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "sideEffects": false,
@@ -12,40 +12,35 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/masahirompp/aws-cdk-webpack-lambda-function.git"
+    "url": "git+https://github.com/jgautheron/aws-cdk-esbuild-lambda-function.git"
   },
   "keywords": [
     "aws-cdk",
     "lambda",
     "webpack"
   ],
-  "author": "Masahiro Onohara <masahirompp@gmail.com> (https://github.com/masahirompp)",
+  "author": "Jonathan Gautheron <gautheronjonathan@gmail.com> (https://github.com/jgautheron)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/masahirompp/aws-cdk-webpack-lambda-function/issues"
+    "url": "https://github.com/jgautheron/aws-cdk-esbuild-lambda-function/issues"
   },
-  "homepage": "https://github.com/masahirompp/aws-cdk-webpack-lambda-function#readme",
+  "homepage": "https://github.com/jgautheron/aws-cdk-esbuild-lambda-function#readme",
   "peerDependencies": {
     "@aws-cdk/aws-lambda": "*",
     "@aws-cdk/core": "*",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0"
-  },
-  "dependencies": {
-    "cross-spawn": "^7.0.3"
+    "esbuild": "^0.13.3"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.103.0",
-    "@aws-cdk/aws-lambda": "^1.89.0",
-    "@aws-cdk/core": "^1.89.0",
-    "@types/cross-spawn": "^6.0.2",
+    "@aws-cdk/assert": "^1.125.0",
+    "@aws-cdk/aws-lambda": "^1.125.0",
+    "@aws-cdk/core": "^1.125.0",
+    "@aws-cdk/aws-cloudfront": "^1.125.0",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
+    "esbuild": "^0.13.3",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.6",
     "ts-loader": "^9.1.2",
-    "typescript": "^4.2.4",
-    "webpack": "^5.11.1",
-    "webpack-cli": "^4.3.0"
+    "typescript": "^4.2.4"
   }
 }
