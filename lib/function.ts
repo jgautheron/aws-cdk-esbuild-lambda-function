@@ -6,6 +6,12 @@ import { Construct } from '@aws-cdk/core'
 import { EdgeFunction } from '@aws-cdk/aws-cloudfront/lib/experimental'
 import { Builder } from './builder'
 
+const nodeVersions: { [key: string]: number } = {
+  [Runtime.NODEJS_10_X.toString()]: 10,
+  [Runtime.NODEJS_12_X.toString()]: 12,
+  [Runtime.NODEJS_14_X.toString()]: 14,
+}
+
 /**
  * Properties for a NodejsFunction
  */
@@ -110,7 +116,9 @@ function preProcess(props: EsbuildFunctionProps) {
 
   // Build with webpack
   const builder = new Builder({
+    buildDir,
     entry: resolve(props.entry),
+    nodeVersion: nodeVersions[runtime.toString()],
     output: resolve(join(handlerDir, outputBasename + '.js')),
   })
   builder.build()

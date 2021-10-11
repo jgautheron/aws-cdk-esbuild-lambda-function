@@ -1,14 +1,24 @@
 import * as esbuild from 'esbuild'
-import { resolve } from 'path'
+import * as path from 'path'
 
 /**
  * Builder options
  */
 export interface BuilderOptions {
   /**
+   * buildDir
+   */
+  readonly buildDir: string
+
+  /**
    * entry path
    */
   readonly entry: string
+
+  /**
+   * lambda runtime
+   */
+  readonly nodeVersion: number
 
   /**
    * output path
@@ -26,11 +36,12 @@ export class Builder {
     esbuild.buildSync({
       bundle: true,
       charset: 'utf8',
-      entryPoints: [resolve(this.options.entry)],
+      entryPoints: [path.resolve(this.options.entry)],
       external: ['aws-sdk'],
       platform: 'node',
       outfile: this.options.output,
-      target: 'es2020',
+      outdir: path.resolve(this.options.buildDir),
+      target: `node${this.options.nodeVersion}`,
       treeShaking: true,
     })
   }
