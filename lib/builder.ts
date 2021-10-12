@@ -40,7 +40,6 @@ export class Builder {
       external: ['aws-sdk'],
       platform: 'node',
       outfile: this.options.output,
-      outdir: path.resolve(this.options.buildDir),
       target: `node${this.options.nodeVersion}`,
       treeShaking: true,
     })
