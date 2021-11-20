@@ -24,6 +24,13 @@ export interface EsbuildFunctionProps extends FunctionOptions {
   readonly entry: string
 
   /**
+   * External dependencies that should not be bundled.
+   *
+   * @example - ['aws-cdk']
+   */
+  readonly external?: string[]
+
+  /**
    * The name of the exported handler in the entry file.
    *
    * @default handler
@@ -118,6 +125,7 @@ function preProcess(props: EsbuildFunctionProps) {
   const builder = new Builder({
     buildDir,
     entry: resolve(props.entry),
+    external: props.external ?? ['aws-cdk'],
     nodeVersion: nodeVersions[runtime.toString()],
     output: resolve(join(handlerDir, outputBasename + '.js')),
   })

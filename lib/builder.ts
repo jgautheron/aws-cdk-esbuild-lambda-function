@@ -16,6 +16,11 @@ export interface BuilderOptions {
   readonly entry: string
 
   /**
+   * external dependencies
+   */
+  readonly external: string[]
+
+  /**
    * lambda runtime
    */
   readonly nodeVersion: number
@@ -37,7 +42,7 @@ export class Builder {
       bundle: true,
       charset: 'utf8',
       entryPoints: [path.resolve(this.options.entry)],
-      external: ['aws-sdk'],
+      external: this.options.external,
       platform: 'node',
       outfile: this.options.output,
       target: `node${this.options.nodeVersion}`,
