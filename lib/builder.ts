@@ -21,6 +21,11 @@ export interface BuilderOptions {
   readonly external: string[]
 
   /**
+   * file loaders
+   */
+  readonly loader: { [ext: string]: esbuild.Loader }
+
+  /**
    * lambda runtime
    */
   readonly nodeVersion: number
@@ -43,6 +48,7 @@ export class Builder {
       charset: 'utf8',
       entryPoints: [path.resolve(this.options.entry)],
       external: this.options.external,
+      loader: this.options.loader,
       platform: 'node',
       outfile: this.options.output,
       target: `node${this.options.nodeVersion}`,

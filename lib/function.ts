@@ -1,4 +1,5 @@
 import { createHash } from 'crypto'
+import { Loader } from 'esbuild'
 import { existsSync } from 'fs'
 import { basename, dirname, extname, join, resolve } from 'path'
 import { Code, Function, FunctionOptions, Runtime, RuntimeFamily, SingletonFunction } from '@aws-cdk/aws-lambda'
@@ -36,6 +37,11 @@ export interface EsbuildFunctionProps extends FunctionOptions {
    * @default handler
    */
   readonly handler?: string
+
+  /**
+   * Loaders associated
+   */
+  readonly loader?: { [ext: string]: Loader }
 
   /**
    * The runtime environment. Only runtimes of the Node.js family are
@@ -126,6 +132,7 @@ function preProcess(props: EsbuildFunctionProps) {
     buildDir,
     entry: resolve(props.entry),
     external: props.external ?? ['aws-cdk'],
+    loader: props.loader ?? {},
     nodeVersion: nodeVersions[runtime.toString()],
     output: resolve(join(handlerDir, outputBasename + '.js')),
   })
