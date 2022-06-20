@@ -8,6 +8,7 @@ export class TestStack extends Stack {
     // test1
     new EsbuildFunction(this, 'WebpackFunction', {
       entry: 'test/lambda/testFunction.ts',
+      loader: { '.xml': 'text' },
     })
 
     // test2

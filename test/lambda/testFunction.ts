@@ -1,3 +1,5 @@
+import testxml from './test.xml'
+
 export const handler = () => {
-  console.log('test')
+  console.log(testxml)
 }

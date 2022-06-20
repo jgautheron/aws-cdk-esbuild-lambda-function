@@ -11,6 +11,7 @@ const nodeVersions: { [key: string]: number } = {
   [Runtime.NODEJS_10_X.toString()]: 10,
   [Runtime.NODEJS_12_X.toString()]: 12,
   [Runtime.NODEJS_14_X.toString()]: 14,
+  [Runtime.NODEJS_16_X.toString()]: 16,
 }
 
 /**
@@ -120,9 +121,11 @@ function preProcess(props: EsbuildFunctionProps) {
   if (!existsSync(props.entry)) {
     throw new Error(`Cannot find entry file at ${props.entry}`)
   }
-  const handler = props.handler || 'handler'
-  const runtime = props.runtime || Runtime.NODEJS_14_X
   const buildDir = props.buildDir || join(dirname(props.entry), '.build')
+  const external = props.external || ['aws-sdk']
+  const handler = props.handler || 'handler'
+  const loader = props.loader || {}
+  const runtime = props.runtime || Runtime.NODEJS_14_X
   const ensureUniqueBuildPath = typeof props.ensureUniqueBuildPath === 'boolean' ? props.ensureUniqueBuildPath : true
   const handlerDir = ensureUniqueBuildPath ? createUniquePath(buildDir, props.entry) : buildDir
   const outputBasename = basename(props.entry, extname(props.entry))
@@ -131,8 +134,8 @@ function preProcess(props: EsbuildFunctionProps) {
   const builder = new Builder({
     buildDir,
     entry: resolve(props.entry),
-    external: props.external ?? ['aws-cdk'],
-    loader: props.loader ?? {},
+    external,
+    loader,
     nodeVersion: nodeVersions[runtime.toString()],
     output: resolve(join(handlerDir, outputBasename + '.js')),
   })
