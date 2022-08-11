@@ -1,6 +1,6 @@
 {
   "name": "aws-cdk-esbuild-lambda-function",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": "This library provides constructs for Node.js Lambda function bundled using esbuild.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -26,18 +26,16 @@
   },
   "homepage": "https://github.com/jgautheron/aws-cdk-esbuild-lambda-function#readme",
   "peerDependencies": {
-    "@aws-cdk/aws-lambda": "*",
-    "@aws-cdk/core": "*",
-    "esbuild": "^0.14.46"
+    "aws-cdk-lib": "*",
+    "constructs": "*",
+    "esbuild": "^0.15.1"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.160.0",
-    "@aws-cdk/aws-lambda": "^1.160.0",
-    "@aws-cdk/core": "^1.160.0",
-    "@aws-cdk/aws-cloudfront": "^1.160.0",
+    "aws-cdk-lib": "^2.37.1",
+    "constructs": "^10.1.72",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
-    "esbuild": "^0.14.46",
+    "esbuild": "^0.15.1",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.6",
     "ts-loader": "^9.1.2",

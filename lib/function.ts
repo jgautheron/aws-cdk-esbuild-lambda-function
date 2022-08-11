@@ -2,9 +2,9 @@ import { createHash } from 'crypto'
 import { Loader } from 'esbuild'
 import { existsSync } from 'fs'
 import { basename, dirname, extname, join, resolve } from 'path'
-import { Code, Function, FunctionOptions, Runtime, RuntimeFamily, SingletonFunction } from '@aws-cdk/aws-lambda'
-import { Construct } from '@aws-cdk/core'
-import { EdgeFunction } from '@aws-cdk/aws-cloudfront/lib/experimental'
+import { Code, Function, FunctionOptions, Runtime, RuntimeFamily, SingletonFunction } from 'aws-cdk-lib/aws-lambda'
+import { Construct } from 'constructs'
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
 import { Builder } from './builder'
 
 const nodeVersions: { [key: string]: number } = {
@@ -85,7 +85,7 @@ export class EsbuildFunction extends Function {
   }
 }
 
-export class EsbuildEdgeFunction extends EdgeFunction {
+export class EsbuildEdgeFunction extends cloudfront.experimental.EdgeFunction {
   constructor(scope: Construct, id: string, props: EsbuildFunctionProps) {
     const { runtime, handlerDir, outputBasename, handler } = preProcess(props)
 
